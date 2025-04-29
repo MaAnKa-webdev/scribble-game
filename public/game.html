@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Scribble Game</title>
+  <style>
+    body {
+      margin: 0;
+      background: #f0f0f0;
+      font-family: sans-serif;
+    }
+  
+    #container {
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      padding: 20px;
+    }
+  
+    #left {
+      margin-right: 20px;
+      text-align: center;
+    }
+  
+    canvas {
+      background: #fff;
+      border: 1px solid #000;
+    }
+  
+    #clear {
+      margin-top: 10px;
+      padding: 8px 16px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+  
+    #right {
+      width: 300px;
+    }
+  
+    #chat {
+      background: #fff;
+      border: 1px solid #000;
+      padding: 10px;
+      height: 600px;
+      display: flex;
+      flex-direction: column;
+    }
+  
+    #messages {
+      list-style-type: none;
+      padding: 0;
+      flex-grow: 1;
+      overflow-y: auto;
+      margin-bottom: 10px;
+    }
+  
+    #messages li {
+      padding: 5px;
+      border-bottom: 1px solid #ddd;
+    }
+  
+    #form {
+      display: flex;
+    }
+  
+    #input {
+      flex-grow: 1;
+      padding: 5px;
+      font-size: 14px;
+    }
+  
+    #form button {
+      padding: 5px 10px;
+      font-size: 14px;
+    }
+  </style>
+  
+</head>
+<body>
+    <h1>Scribble Game 🎨</h1>
+    <p id="status"></p>
+    <div id="currentWord" style="font-size: 24px; font-weight: bold;"></div>
+    <div id="timer">
+      <p>Restliche Zeit: <span id="time-left">60</span> Sekunden</p>
+  </div>
+  
+  
+
+  
+    <!-- Farbauswahl -->
+    <label for="color">Farbe:</label>
+    <input type="color" id="color" value="#000000">
+  
+    <!-- Strichstärke -->
+    <label for="thickness">Strichstärke:</label>
+    <input type="range" id="thickness" min="1" max="10" value="2">
+  
+    <div id="container">
+        <div id="left">
+          <canvas id="canvas" width="800" height="600"></canvas>
+          <button id="clear">Leeren 🧹</button>
+        </div>
+        <div id="right">
+          <div id="chat">
+            <ul id="messages"></ul>
+            <form id="form">
+              <input id="input" autocomplete="off" placeholder="Deine Nachricht..." />
+              <button>Senden</button>
+            </form>
+          </div>
+        </div>
+      </div>
+      <div id="scores"></div>
+
+      
+    <script>
+      // Wenn der Benutzer seinen Namen setzt
+io.on('connection', (socket) => {
+    console.log('Ein Nutzer ist verbunden:', socket.id);
+
+    // Empfang des Benutzernamens vom Client
+    socket.on('setUsername', (username) => {
+        usernames[socket.id] = username; // Speichere den Benutzernamen für diesen Socket
+        console.log('Benutzername gesetzt:', username);
+    });
+
+});
+    </script>
+  
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="client.js"></script>
+    
+  </body>
+</html>
