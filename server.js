@@ -21,7 +21,7 @@ function getRandomWord() {
 
 // Funktion zum Starten einer neuen Runde
 let roundTimer; // Timer für jede Runde
-const roundTime = 60; // Zeit in Sekunden für eine Runde
+const roundTime = 100; // Zeit in Sekunden für eine Runde
 
 function startNewRound() {
     const clients = Array.from(io.sockets.sockets.keys());
@@ -102,26 +102,25 @@ io.on('connection', (socket) => {
     });
 
     // Chat-Logik mit Ratesystem
-socket.on('chat message', (msg) => {
-  const username = usernames[socket.id] || 'Unbekannt'; // Benutzername holen
-  if (socket.id !== currentDrawer && msg.toLowerCase() === currentWord.toLowerCase()) {
-      // Richtige Antwort!
-      scores[socket.id] += 1;
+    socket.on('chat message', (msg) => {
+    const username = usernames[socket.id] || 'Unbekannt'; // Benutzername holen
+        if (socket.id !== currentDrawer && msg.toLowerCase() === currentWord.toLowerCase()) {
+            // Richtige Antwort!
+            scores[socket.id] += 1;
 
-      io.emit('chat message', `${username} hat richtig geraten! Es war: ${currentWord}`);
-      // Punktestand an alle Clients senden
-io.emit('scores', Object.keys(scores).map(id => ({
+            io.emit('chat message', `${username} hat richtig geraten! Es war: ${currentWord}`);
+            // Punktestand an alle Clients senden
+            io.emit('scores', Object.keys(scores).map(id => ({
   username: usernames[id] || 'Unbekannt', // Benutzername holen
   score: scores[id]
-})));
+            })));
 
-      startNewRound(); // Nächste Runde starten
-  } else {
-      // Normale Nachricht
-      io.emit('chat message', `${username}: ${msg}`);
-  }
-});
-
+            startNewRound(); // Nächste Runde starten
+        } else {
+            // Normale Nachricht
+            io.emit('chat message', `${username}: ${msg}`);
+        }
+    });
 
     // Disconnect-Handling
     socket.on('disconnect', () => {

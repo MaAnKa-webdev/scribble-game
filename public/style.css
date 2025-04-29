@@ -1,0 +1,234 @@
+@import url('https://fonts.googleapis.com/css2?family=Rock+Salt&display=swap');
+
+.rock-salt-regular {
+  font-family: "Rock Salt", cursive;
+  font-weight: 400;
+  font-style: normal;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background-image: url("/scribble_background_v2.jpeg");
+  background-size: cover;
+  font-family: sans-serif;
+}
+
+#start-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+#start-container {
+  padding-top: 10%;
+  height: 70%;
+  width: 70%;
+  background-color: rgba(255, 255, 255, 0.8);
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  text-align: center;
+}
+
+#start-container h1 {
+  font-family: "Rock Salt";
+  font-size: 3em;
+  margin: 0;
+  padding: 20px;
+  color: #333;
+}
+
+#start-container p {
+  font-size: 1.2em;
+  color: #555;
+}
+
+#start-container input[type="text"] {
+  width: 40%;
+  padding: 10px;
+  font-size: 1.2em;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin-bottom: 20px;
+}
+
+#start-container button {
+  padding: 10px 20px;
+  font-size: 1.2em;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+#start-container button:hover {
+  background-color: #45a049;
+}
+
+#overlay {
+  height: 110vh;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+#overlay h1 {
+  font-family: "Rock Salt";
+  font-size: 3em;
+  margin: 0;
+  color: #fff;
+  text-align: center;
+  padding-bottom: 2px;
+}
+
+ #overlay-content {
+  display: flex;
+  justify-content: space-evenly;
+  height: 80vh;
+  background-color: rgba(255, 255, 255, 0.8);
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  margin-left: 3vw;
+  margin-right: 3vw;
+  margin-bottom: 2vh;
+  padding: 0;
+}
+
+#container {
+  display: flex;
+  align-items: flex-start;
+  padding-top: 2vw;
+  margin: 0;
+}
+
+#punkte{
+  width: 10vw;
+  color: #333;
+}
+
+#header_punkte {
+  font-family: "Rock Salt";
+  font-weight: bold;
+  color: #333;
+}
+
+#left {
+  margin-right: 2vw;
+  text-align: center;
+  width: 50vw;
+}
+
+#game-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2.5vh;
+}
+
+#status {
+  font-size: 1.5em;
+  color: #555;
+}
+
+#current-word {
+  font-size: 1.5em;
+  color: #333;
+  font-weight: bold;
+}
+
+#timer{
+  font-size: 1.5em;
+  color: #333;
+  font-weight: bold;
+  padding-right: 7vw;
+  position: relative;
+}
+
+#timer-icon {
+  width: 75px;
+  height: 75px;
+  margin-right: 1vw;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-55%);
+  padding-right: 7vw;
+}
+
+#zeichenwerkzeuge {
+  margin-bottom: 2vh;
+}
+
+canvas {
+  background: #fff;
+  border: 1px solid #000;
+  width: 50vw;
+  height: 50vh;
+}
+
+#clear {
+  padding: 10px 20px;
+  font-size: 1.2em;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+#start-container button:hover {
+  background-color: #45a049;
+}
+
+#right {
+  width: 25vw;
+}
+
+#chat {
+  background: #fff;
+  border: 1px solid #000;
+  padding: 1vw;
+  height: 65vh;
+  display: flex;
+  flex-direction: column;
+}
+
+#messages {
+  list-style-type: none;
+  padding: 0;
+  flex-grow: 1;
+  overflow-y: auto;
+  margin-bottom: 1vw;
+}
+
+#messages li {
+  padding: 5px;
+  border-bottom: 1px solid #ddd;
+}
+
+#form {
+  display: flex;
+}
+
+#input {
+  flex-grow: 1;
+  padding: 5px;
+  font-size: 14px;
+  width: 10vw;
+}
+
+#form button {
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+#start-container button:hover {
+  background-color: #45a049;
+}

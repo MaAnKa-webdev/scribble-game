@@ -7,31 +7,30 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div id="start-container">
-        <h1>Willkommen im Scribble Game!</h1>
-        <p>Gib deinen Benutzernamen ein, um zu starten:</p>
-        <input type="text" id="username" placeholder="Benutzername" required>
-        <button id="start-button">Spiel starten</button>
+    <div id="start-page">
+        <div id="start-container">
+            <h1>Scribble Game</h1>
+            <p>Gib deinen Benutzernamen ein, um zu starten:</p>
+            <input type="text" id="username" placeholder="Benutzername" required>
+            <button id="start-button">Spiel starten</button>
+        </div>
     </div>
-
     <script src="/socket.io/socket.io.js"></script>
     <script>
         const socket = io();
-
         // Wenn der Benutzer den "Spiel starten"-Button klickt
         document.getElementById('start-button').addEventListener('click', () => {
-    const username = document.getElementById('username').value.trim();
-    if (username) {
-        // Sende den Benutzernamen an den Server
-        socket.emit('setUsername', username);
+            const username = document.getElementById('username').value.trim();
+            if (username) {
+                // Sende den Benutzernamen an den Server
+                socket.emit('setUsername', username);
 
-        // Weiterleitung zur Spielseite mit Benutzername
-        window.location.href = '/game.html?username=' + encodeURIComponent(username);
-    } else {
-        alert('Bitte gib einen Benutzernamen ein!');
-    }
-});
-
+                // Weiterleitung zur Spielseite mit Benutzername
+                window.location.href = '/game.html?username=' + encodeURIComponent(username);
+            } else {
+                alert('Bitte gib einen Benutzernamen ein!');
+            }
+        });
     </script>
 </body>
 </html>

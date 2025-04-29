@@ -4,133 +4,67 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Scribble Game</title>
-  <style>
-    body {
-      margin: 0;
-      background: #f0f0f0;
-      font-family: sans-serif;
-    }
-  
-    #container {
-      display: flex;
-      justify-content: center;
-      align-items: flex-start;
-      padding: 20px;
-    }
-  
-    #left {
-      margin-right: 20px;
-      text-align: center;
-    }
-  
-    canvas {
-      background: #fff;
-      border: 1px solid #000;
-    }
-  
-    #clear {
-      margin-top: 10px;
-      padding: 8px 16px;
-      font-size: 16px;
-      cursor: pointer;
-    }
-  
-    #right {
-      width: 300px;
-    }
-  
-    #chat {
-      background: #fff;
-      border: 1px solid #000;
-      padding: 10px;
-      height: 600px;
-      display: flex;
-      flex-direction: column;
-    }
-  
-    #messages {
-      list-style-type: none;
-      padding: 0;
-      flex-grow: 1;
-      overflow-y: auto;
-      margin-bottom: 10px;
-    }
-  
-    #messages li {
-      padding: 5px;
-      border-bottom: 1px solid #ddd;
-    }
-  
-    #form {
-      display: flex;
-    }
-  
-    #input {
-      flex-grow: 1;
-      padding: 5px;
-      font-size: 14px;
-    }
-  
-    #form button {
-      padding: 5px 10px;
-      font-size: 14px;
-    }
-  </style>
-  
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h1>Scribble Game 🎨</h1>
-    <p id="status"></p>
-    <div id="currentWord" style="font-size: 24px; font-weight: bold;"></div>
-    <div id="timer">
-      <p>Restliche Zeit: <span id="time-left">60</span> Sekunden</p>
-  </div>
-  
-  
-
-  
-    <!-- Farbauswahl -->
-    <label for="color">Farbe:</label>
-    <input type="color" id="color" value="#000000">
-  
-    <!-- Strichstärke -->
-    <label for="thickness">Strichstärke:</label>
-    <input type="range" id="thickness" min="1" max="10" value="2">
-  
-    <div id="container">
-        <div id="left">
-          <canvas id="canvas" width="800" height="600"></canvas>
-          <button id="clear">Leeren 🧹</button>
-        </div>
-        <div id="right">
-          <div id="chat">
-            <ul id="messages"></ul>
-            <form id="form">
-              <input id="input" autocomplete="off" placeholder="Deine Nachricht..." />
-              <button>Senden</button>
-            </form>
+  <div id="overlay">
+    <h1>Scribble Game</h1>
+    <div id="overlay-content">
+      <div id="game-controls">
+        <div id="container">
+          <div id="punkte">
+            <p id="header_punkte">Punkte:</p>
+            <div id="scores"></div>
+          </div>
+          <div id="left">
+            <div id="game-info">
+              <div>
+                <p id="status"></p>
+                <div id="currentWord"></div> 
+              </div>
+              <div id="timer">
+                <img src="/timer.png" alt="Timer" id="timer-icon">
+                <p><span id="time-left">100</span></p>
+              </div>
+            </div>
+            <div id="zeichenwerkzeuge">
+              <label for="color">Farbe:</label>
+              <input type="color" id="color" value="#000000">
+              <label for="thickness">Strichstärke:</label>
+              <input type="range" id="thickness" min="1" max="10" value="2">
+            </div>
+            <canvas id="canvas" style="width: 50vw; height: 50vh;"></canvas>
+            <button id="clear">Leeren 🧹</button>
+          </div>
+          <div id="right">
+            <div id="chat">
+              <ul id="messages"></ul>
+              <form id="form">
+                <input id="input" autocomplete="off" placeholder="Deine Nachricht..." />
+                <button>Senden</button>
+              </form>
+            </div>
           </div>
         </div>
       </div>
-      <div id="scores"></div>
-
+    </div>
+  </div>
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="client.js"></script>
+  <script>
+    // Den Benutzernamen aus der URL extrahieren
+    const urlParams = new URLSearchParams(window.location.search);
+    const username = urlParams.get('username'); // Hier holen wir den Benutzernamen aus der URL
       
-    <script>
-      // Wenn der Benutzer seinen Namen setzt
-io.on('connection', (socket) => {
-    console.log('Ein Nutzer ist verbunden:', socket.id);
-
-    // Empfang des Benutzernamens vom Client
-    socket.on('setUsername', (username) => {
-        usernames[socket.id] = username; // Speichere den Benutzernamen für diesen Socket
-        console.log('Benutzername gesetzt:', username);
-    });
-
-});
-    </script>
+    // Überprüfen, ob der Benutzername korrekt extrahiert wurde
+    console.log('Benutzername:', username);
   
-    <script src="/socket.io/socket.io.js"></script>
-    <script src="client.js"></script>
-    
+    // Falls der Benutzername gefunden wurde, sende ihn an den Server
+    if (username) {
+        socket.emit('setUsername', username); // Sende den Benutzernamen an den Server
+    } else {
+        console.log("Kein Benutzername in der URL gefunden!");
+    }
+  </script>
   </body>
 </html>
